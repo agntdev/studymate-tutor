@@ -1,19 +1,60 @@
 [
   {
-    "name": "/quiz",
+    "name": "/quiz starts quiz creation",
     "steps": [
       {
+        "send": { "text": "/quiz" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Initiate quiz creation flow"
+              "text": "What topic do you want a quiz on?"
             }
           }
-        ],
-        "send": {
-          "text": "/quiz"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "quiz topic selection shows difficulty",
+    "steps": [
+      {
+        "send": { "callback": "quiz:topic:Mathematics" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Great! Pick a difficulty for \"Mathematics\":"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "quiz difficulty selection shows count",
+    "steps": [
+      {
+        "send": { "callback": "quiz:topic:Mathematics" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Great! Pick a difficulty for \"Mathematics\":"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "quiz:diff:medium" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "How many questions for Mathematics (medium)?"
+            }
+          }
+        ]
       }
     ]
   }

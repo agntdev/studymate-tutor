@@ -1,0 +1,72 @@
+[
+  {
+    "name": "settings shows current settings",
+    "steps": [
+      {
+        "send": { "callback": "settings:show" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "⚙️ Your settings\n\n📊 Default difficulty: medium\n🔢 Quiz questions: 5\n\nTap a setting to change it." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "settings difficulty menu",
+    "steps": [
+      {
+        "send": { "callback": "settings:difficulty" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Pick your default difficulty:" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "settings set difficulty",
+    "steps": [
+      {
+        "send": { "callback": "settings:set_diff:hard" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "✅ Default difficulty set to hard." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "settings quiz count menu",
+    "steps": [
+      {
+        "send": { "callback": "settings:quiz_count" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "How many questions by default?" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "settings set quiz count",
+    "steps": [
+      {
+        "send": { "callback": "settings:set_count:10" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "✅ Default quiz count set to 10 questions." }
+          }
+        ]
+      }
+    ]
+  }
+]

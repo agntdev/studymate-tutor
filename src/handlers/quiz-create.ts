@@ -1,17 +1,30 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
+import { getStore } from "../store.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "Make quiz", data: "quiz:create" }) if the toolkit exposes it.
-
-const composer = new Composer();
+const composer = new Composer<Ctx>();
 
 composer.callbackQuery("quiz:create", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Generate quiz from current question/topic");
+  ctx.session.step = "quiz_topic";
+  await ctx.editMessageText("What topic do you want a quiz on?", {
+    reply_markup: inlineKeyboard([
+      [
+        inlineButton("Mathematics", "quiz:topic:Mathematics"),
+        inlineButton("Physics", "quiz:topic:Physics"),
+        inlineButton("Chemistry", "quiz:topic:Chemistry"),
+        inlineButton("Biology", "quiz:topic:Biology"),
+      ],
+      [
+        inlineButton("History", "quiz:topic:History"),
+        inlineButton("Literature", "quiz:topic:Literature"),
+        inlineButton("Geography", "quiz:topic:Geography"),
+        inlineButton("Computer Science", "quiz:topic:Computer Science"),
+      ],
+      [inlineButton("⬅️ Back to menu", "menu:main")],
+    ]),
+  });
 });
 
 export default composer;
