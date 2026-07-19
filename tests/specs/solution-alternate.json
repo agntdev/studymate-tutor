@@ -1,19 +1,17 @@
 [
   {
-    "name": "Alternative method",
+    "name": "Alternative method shows different approach",
     "steps": [
       {
+        "send": { "callback": "solution:alternate" },
         "expect": [
           {
-            "method": "sendMessage",
+            "method": "editMessageText",
             "payload": {
-              "text": "Request alternative solution approach"
+              "text": "🔄 Here's another way to look at it:\n\n💡 Alternative approach: Break the problem into smaller parts. Identify what's given, what's needed, and work backwards from the goal. Try a different representation (diagram, table, or equation)."
             }
           }
-        ],
-        "send": {
-          "callback": "solution:alternate"
-        }
+        ]
       }
     ]
   }

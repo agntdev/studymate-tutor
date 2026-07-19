@@ -14,13 +14,13 @@ describe("buildBot handler loader", () => {
     expect(suite.passed).toBeGreaterThan(0);
   });
 
-  it("unknown input falls through to the global fallback", async () => {
+  it("question solver handles free text input", async () => {
     const suite = await runSpecs(() => buildBot("test-token"), [
       parseBotSpec({
-        name: "unknown text hits the fallback",
+        name: "free text generates a solution",
         steps: [
-          { send: { text: "qwerty" },
-            expect: [{ method: "sendMessage", payload: { text: "Sorry, I didn't understand that. Try /help." } }] },
+          { send: { text: "Solve this algebra equation" },
+            expect: [{ method: "sendMessage", payload: { text: "📚 Solution — Algebra\n\nStep 1: Identify the variable and what you're solving for.\nStep 2: Isolate the variable using inverse operations.\nStep 3: Perform the same operation on both sides.\nStep 4: Verify by substituting back into the original equation.\n\n📝 Teaching note: Always check your answer — plug it back in to verify." } }] },
         ],
       }),
     ]);

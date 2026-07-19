@@ -1,19 +1,17 @@
 [
   {
-    "name": "Make quiz",
+    "name": "Make quiz shows topic selection",
     "steps": [
       {
+        "send": { "callback": "quiz:create" },
         "expect": [
           {
-            "method": "sendMessage",
+            "method": "editMessageText",
             "payload": {
-              "text": "Generate quiz from current question/topic"
+              "text": "What topic do you want a quiz on?"
             }
           }
-        ],
-        "send": {
-          "callback": "quiz:create"
-        }
+        ]
       }
     ]
   }

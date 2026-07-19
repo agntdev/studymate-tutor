@@ -1,0 +1,16 @@
+[
+  {
+    "name": "free text question generates a step-by-step solution",
+    "steps": [
+      {
+        "send": { "text": "Solve this addition problem" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "📚 Solution — Addition\n\nStep 1: Identify the numbers to add.\nStep 2: Align the numbers by place value.\nStep 3: Add each column from right to left.\nStep 4: Carry over if a column sum exceeds 9.\n\n📝 Teaching note: Remind students that addition is commutative — the order doesn't matter." }
+          }
+        ]
+      }
+    ]
+  }
+]

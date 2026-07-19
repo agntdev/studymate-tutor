@@ -1,19 +1,119 @@
 [
   {
-    "name": "/note",
+    "name": "/note shows note management menu",
     "steps": [
       {
+        "send": { "text": "/note" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Manage notes (add/list/delete)"
+              "text": "📒 What would you like to do with your notes?"
             }
           }
-        ],
-        "send": {
-          "text": "/note"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "note:list shows empty state",
+    "steps": [
+      {
+        "send": { "callback": "note:list" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "No notes yet — tap ➕ Add to create one."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "note:add prompts for topic",
+    "steps": [
+      {
+        "send": { "callback": "note:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "What's the topic for this note?"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "note:delete empty state",
+    "steps": [
+      {
+        "send": { "callback": "note:delete" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "No notes to delete — tap ➕ Add to create one first."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "note:menu returns to note menu",
+    "steps": [
+      {
+        "send": { "callback": "note:menu" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "📒 What would you like to do with your notes?"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "full note add flow",
+    "steps": [
+      {
+        "send": { "callback": "note:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "What's the topic for this note?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "Algebra Basics" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Got it. Now write your note on \"Algebra Basics\":"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "An equation is a mathematical statement that two expressions are equal." },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Note saved on \"Algebra Basics\"."
+            }
+          }
+        ]
       }
     ]
   }
